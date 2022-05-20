@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
 
-const RaceChien = () => {
+
+const RaceChien = ({ navigation }) => {
 
     const [raceChiens, setRaceChiens] = useState([]);
 
@@ -19,24 +20,25 @@ const RaceChien = () => {
     }, [])
 
     return (
-        <View style={{width: '100%'}}>
+        <View style={{width: '100%'}}>     
             { raceChiens && 
                 <FlatList
                     data={Object.keys(raceChiens)}
                     renderItem={({ item }) => (
                         <TouchableOpacity 
                             key={item} 
-                            style={{ display: 'flex', flexDirection: 'row', width: '100%' }}
+                            style={{ display: 'flex', flexDirection: 'row', width: '100%', padding: 10, paddingLeft: 20 }}
                             onPress={() => {
-                            	// todo code afficher chien
+                                navigation.push('PhotoChien', {race: item})
                             }}
                         >
                             <Text>{item}</Text>
                         </TouchableOpacity>
-
                     )}
                 />
             }
+
+
         </View>
     )
 }
